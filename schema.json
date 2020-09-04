@@ -1,22 +1,139 @@
 {
-  "dataKey": "AQIDAHhcZWXOdlBglkxBhI23ElO/clC/kuw5ynjXDSqJgfTz8gH969gBMyAZf/QZy/ceFFnsAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQM+20kW6lnMV+NiZhGAgEQgDu1XiiAEqBaNz++GHf0G3FoAXvfHQTFL9QN1BYuhnh1TAwWdGSg3VP9MBMNh1RbGOaffsaaqzXYSp39nQ==",
+  "schemaVersion": "3",
+  "created": "2017-07-13T19:16:10.801Z",
+  "workflows": {},
+  "services": {
+    "shopify:seans-store-takeshape": {
+      "params": {
+        "type": "graphql",
+        "authHeader": "X-Shopify-Access-Token",
+        "endpoint": "https://seans-store-takeshape.myshopify.com/admin/api/2020-07/graphql.json",
+        "shop": "seans-store-takeshape"
+      },
+      "auth": "0ilz5lgnCs0DYq/xqjzEGUBI4tvSpOYYeno2eD9IRMg9HEej4knsr4CyxS8vhpKZOb3DUlozlZJfXab0hpBPQYHXMtx6vfKn4M73AtZa6WF/RqUT8epppeG1sTEAGK4vr7G/URIiFIwB9p+jdFe+Z7E="
+    }
+  },
+  "version": 2,
+  "queries": {
+    "getProduct": {
+      "resolver": "graphql:query",
+      "args": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "@tag": "id"
+          }
+        },
+        "required": ["id"]
+      },
+      "source": "shopify:seans-store-takeshape:Product",
+      "type": "Product",
+      "query": "product"
+    },
+    "getPost": {
+      "type": "Post",
+      "resolver": "takeshape:get",
+      "source": "takeshape:self:Post"
+    },
+    "getTag": {
+      "type": "Tag",
+      "resolver": "takeshape:get",
+      "source": "takeshape:self:Tag"
+    },
+    "getTagList": {
+      "type": "PaginatedList<Tag>",
+      "resolver": "takeshape:list",
+      "source": "takeshape:self:Tag"
+    },
+    "getPostList": {
+      "type": "PaginatedList<Post>",
+      "resolver": "takeshape:list",
+      "source": "takeshape:self:Post"
+    },
+    "getProductList": {
+      "resolver": "graphql:query",
+      "args": {
+        "type": "object",
+        "properties": {
+          "after": {
+            "type": "string",
+            "description": "Returns the elements that come after the specified cursor."
+          },
+          "last": {
+            "type": "integer",
+            "description": "Returns up to the last `n` elements from the list."
+          },
+          "reverse": {
+            "type": "boolean",
+            "description": "Reverse the order of the underlying list."
+          },
+          "before": {
+            "type": "string",
+            "description": "Returns the elements that come before the specified cursor."
+          },
+          "first": {
+            "type": "integer",
+            "description": "Returns up to the first `n` elements from the list."
+          }
+        }
+      },
+      "source": "shopify:seans-store-takeshape:Product",
+      "type": "ProductConnection",
+      "query": "products"
+    }
+  },
+  "dataKey": "AQIDAHhcZWXOdlBglkxBhI23ElO/clC/kuw5ynjXDSqJgfTz8gFvrYhMK581OOYYSjJNwit9AAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMPLnOWQxVHD5AzgXdAgEQgDu0ANKQTBQ7dNFJEQcd2aOfZncgw7DjUasC+7Yp2ci0Y2+ZmbbtIa2kcHBt8eriFPR28uwgnvDzn8t6Qw==",
   "defaultLocale": "en",
   "locales": ["en"],
   "apiVersion": "2",
-  "schemaVersion": "3",
-  "created": 1599163191895,
-  "services": {
-    "shopify:michaels-store-takeshape-1": {
-      "params": {
-        "authHeader": "X-Shopify-Access-Token",
-        "endpoint": "https://michaels-store-takeshape-1.myshopify.com/admin/api/2020-07/graphql.json",
-        "shop": "michaels-store-takeshape-1",
-        "type": "graphql"
+  "mutations": {
+    "deletePost": {
+      "type": "boolean",
+      "resolver": "takeshape:delete",
+      "source": "takeshape:self:Post"
+    },
+    "updateTag": {
+      "type": "Tag",
+      "resolver": "takeshape:update",
+      "source": "takeshape:self:Tag"
+    },
+    "deleteTag": {
+      "type": "boolean",
+      "resolver": "takeshape:delete",
+      "source": "takeshape:self:Tag"
+    },
+    "updatePost": {
+      "type": "Post",
+      "resolver": "takeshape:update",
+      "source": "takeshape:self:Post"
+    },
+    "createTag": {
+      "type": "Tag",
+      "resolver": "takeshape:create",
+      "source": "takeshape:self:Tag"
+    },
+    "createPost": {
+      "type": "Post",
+      "resolver": "takeshape:create",
+      "source": "takeshape:self:Post"
+    },
+    "createProduct": {
+      "resolver": "graphql:mutation",
+      "args": {
+        "type": "object",
+        "properties": {
+          "input": {
+            "$ref": "#/shapes/ProductInput/schema"
+          }
+        },
+        "required": ["input"]
       },
-      "auth": "sOfZmOYvuTL8uySmByltSgDCdLxBNGXPdxtLwpMoVJf8nn4ka9PCxMvsJAOEovUXn9Da0Bha4yyNZgsGPUZ9uGKil0wWg3tth6pskUYZYYVDwsAzhzHrlJY+nZhVHbKc9Ex/HTb7DXH6kV70IkMLiJ2jykP8FYY="
+      "source": "shopify:seans-store-takeshape:Product",
+      "type": "ProductCreatePayload",
+      "query": "productCreate"
     }
   },
-  "workflows": {},
   "shapes": {
     "Post": {
       "name": "Post",
@@ -38,7 +155,7 @@
                 },
                 "required": ["id"]
               },
-              "source": "shopify:michaels-store-takeshape-1:Product",
+              "source": "shopify:seans-store-takeshape:Product",
               "type": "Product",
               "query": "product"
             }
@@ -93,12 +210,12 @@
         "properties": {
           "description": {
             "type": "string",
-            "@mapping": "shopify:michaels-store-takeshape-1:SEO.description",
+            "@mapping": "shopify:seans-store-takeshape:SEO.description",
             "description": "SEO Description."
           },
           "title": {
             "type": "string",
-            "@mapping": "shopify:michaels-store-takeshape-1:SEO.title",
+            "@mapping": "shopify:seans-store-takeshape:SEO.title",
             "description": "SEO Title."
           }
         }
@@ -114,80 +231,80 @@
             "items": {
               "$ref": "#/shapes/Image/schema"
             },
-            "@mapping": "shopify:michaels-store-takeshape-1:Product.images"
+            "@mapping": "shopify:seans-store-takeshape:Product.images"
           },
           "publishedAt": {
             "type": "string",
             "format": "date-time",
             "@tag": "date",
-            "@mapping": "shopify:michaels-store-takeshape-1:Product.publishedAt"
+            "@mapping": "shopify:seans-store-takeshape:Product.publishedAt"
           },
           "templateSuffix": {
             "type": "string",
-            "@mapping": "shopify:michaels-store-takeshape-1:Product.templateSuffix"
+            "@mapping": "shopify:seans-store-takeshape:Product.templateSuffix"
           },
           "availablePublicationCount": {
             "type": "integer",
-            "@mapping": "shopify:michaels-store-takeshape-1:Product.availablePublicationCount"
+            "@mapping": "shopify:seans-store-takeshape:Product.availablePublicationCount"
           },
           "description": {
             "type": "string",
-            "@mapping": "shopify:michaels-store-takeshape-1:Product.description"
+            "@mapping": "shopify:seans-store-takeshape:Product.description"
           },
           "handle": {
             "type": "string",
-            "@mapping": "shopify:michaels-store-takeshape-1:Product.handle"
+            "@mapping": "shopify:seans-store-takeshape:Product.handle"
           },
           "title": {
             "type": "string",
             "@tag": "title",
-            "@mapping": "shopify:michaels-store-takeshape-1:Product.title"
+            "@mapping": "shopify:seans-store-takeshape:Product.title"
           },
           "tags": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "@mapping": "shopify:michaels-store-takeshape-1:Product.tags"
+            "@mapping": "shopify:seans-store-takeshape:Product.tags"
           },
           "createdAt": {
             "description": "The date and time ([ISO 8601 format](http://en.wikipedia.org/wiki/ISO_8601)) when the product was created.",
             "type": "string",
             "format": "date-time",
-            "@mapping": "shopify:michaels-store-takeshape-1:Product.createdAt"
+            "@mapping": "shopify:seans-store-takeshape:Product.createdAt"
           },
           "featuredImage": {
             "$ref": "#/shapes/Image/schema",
-            "@mapping": "shopify:michaels-store-takeshape-1:Product.featuredImage"
+            "@mapping": "shopify:seans-store-takeshape:Product.featuredImage"
           },
           "vendor": {
             "type": "string",
-            "@mapping": "shopify:michaels-store-takeshape-1:Product.vendor"
+            "@mapping": "shopify:seans-store-takeshape:Product.vendor"
           },
           "descriptionHtml": {
             "type": "string",
             "@tag": "html",
-            "@mapping": "shopify:michaels-store-takeshape-1:Product.descriptionHtml"
+            "@mapping": "shopify:seans-store-takeshape:Product.descriptionHtml"
           },
           "id": {
             "type": "string",
             "@tag": "id",
-            "@mapping": "shopify:michaels-store-takeshape-1:Product.id"
+            "@mapping": "shopify:seans-store-takeshape:Product.id"
           },
           "seo": {
             "$ref": "#/shapes/SEO/schema",
-            "@mapping": "shopify:michaels-store-takeshape-1:Product.seo",
+            "@mapping": "shopify:seans-store-takeshape:Product.seo",
             "description": "SEO information of the product."
           },
           "productType": {
             "type": "string",
-            "@mapping": "shopify:michaels-store-takeshape-1:Product.productType"
+            "@mapping": "shopify:seans-store-takeshape:Product.productType"
           },
           "updatedAt": {
             "type": "string",
             "format": "date-time",
             "description": "The date and time ([ISO 8601 format](http://en.wikipedia.org/wiki/ISO_8601)) when the product was last modified.",
-            "@mapping": "shopify:michaels-store-takeshape-1:Product.updatedAt"
+            "@mapping": "shopify:seans-store-takeshape:Product.updatedAt"
           }
         }
       },
@@ -201,21 +318,21 @@
         "properties": {
           "width": {
             "type": "number",
-            "@mapping": "shopify:michaels-store-takeshape-1:Image.width"
+            "@mapping": "shopify:seans-store-takeshape:Image.width"
           },
           "id": {
             "type": "number",
             "@tag": "id",
-            "@mapping": "shopify:michaels-store-takeshape-1:Image.id"
+            "@mapping": "shopify:seans-store-takeshape:Image.id"
           },
           "altText": {
             "type": "string",
-            "@mapping": "shopify:michaels-store-takeshape-1:Image.altText"
+            "@mapping": "shopify:seans-store-takeshape:Image.altText"
           },
           "src": {
             "type": "string",
             "@tag": "imageUrl",
-            "@mapping": "shopify:michaels-store-takeshape-1:Image.src"
+            "@mapping": "shopify:seans-store-takeshape:Image.src"
           }
         }
       },
@@ -229,40 +346,40 @@
         "properties": {
           "vendor": {
             "type": "string",
-            "@mapping": "shopify:michaels-store-takeshape-1:ProductInput.vendor"
+            "@mapping": "shopify:seans-store-takeshape:ProductInput.vendor"
           },
           "description": {
             "type": "string",
-            "@mapping": "shopify:michaels-store-takeshape-1:ProductInput.description"
+            "@mapping": "shopify:seans-store-takeshape:ProductInput.description"
           },
           "descriptionHtml": {
             "type": "string",
             "@tag": "html",
-            "@mapping": "shopify:michaels-store-takeshape-1:ProductInput.descriptionHtml"
+            "@mapping": "shopify:seans-store-takeshape:ProductInput.descriptionHtml"
           },
           "handle": {
             "type": "string",
-            "@mapping": "shopify:michaels-store-takeshape-1:ProductInput.handle"
+            "@mapping": "shopify:seans-store-takeshape:ProductInput.handle"
           },
           "seo": {
             "$ref": "#/shapes/SEO/schema",
-            "@mapping": "shopify:michaels-store-takeshape-1:ProductInput.seo"
+            "@mapping": "shopify:seans-store-takeshape:ProductInput.seo"
           },
           "title": {
             "type": "string",
             "@tag": "title",
-            "@mapping": "shopify:michaels-store-takeshape-1:ProductInput.title"
+            "@mapping": "shopify:seans-store-takeshape:ProductInput.title"
           },
           "productType": {
             "type": "string",
-            "@mapping": "shopify:michaels-store-takeshape-1:ProductInput.productType"
+            "@mapping": "shopify:seans-store-takeshape:ProductInput.productType"
           },
           "tags": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "@mapping": "shopify:michaels-store-takeshape-1:ProductInput.tags"
+            "@mapping": "shopify:seans-store-takeshape:ProductInput.tags"
           }
         },
         "required": ["title"]
@@ -280,11 +397,11 @@
             "items": {
               "$ref": "#/shapes/ProductEdge/schema"
             },
-            "@mapping": "shopify:michaels-store-takeshape-1:ProductConnection.edges"
+            "@mapping": "shopify:seans-store-takeshape:ProductConnection.edges"
           },
           "pageInfo": {
             "$ref": "#/shapes/PageInfo/schema",
-            "@mapping": "shopify:michaels-store-takeshape-1:ProductInput.pageInfo"
+            "@mapping": "shopify:seans-store-takeshape:ProductInput.pageInfo"
           }
         },
         "required": []
@@ -302,12 +419,12 @@
         "properties": {
           "hasNextPage": {
             "type": "boolean",
-            "@mapping": "shopify:michaels-store-takeshape-1:PageInfo.hasNextPage",
+            "@mapping": "shopify:seans-store-takeshape:PageInfo.hasNextPage",
             "description": "Indicates if there are more pages to fetch."
           },
           "hasPreviousPage": {
             "type": "boolean",
-            "@mapping": "shopify:michaels-store-takeshape-1:PageInfo.hasPreviousPage",
+            "@mapping": "shopify:seans-store-takeshape:PageInfo.hasPreviousPage",
             "description": "Indicates if there are any pages prior to the current page."
           }
         },
@@ -323,12 +440,12 @@
         "properties": {
           "cursor": {
             "type": "string",
-            "@mapping": "shopify:michaels-store-takeshape-1:ProductEdge.cursor",
+            "@mapping": "shopify:seans-store-takeshape:ProductEdge.cursor",
             "description": "A cursor for use in pagination."
           },
           "node": {
             "$ref": "#/shapes/Product/schema",
-            "@mapping": "shopify:michaels-store-takeshape-1:ProductEdge.node",
+            "@mapping": "shopify:seans-store-takeshape:ProductEdge.node",
             "description": "The item at the end of ProductEdge."
           }
         },
@@ -342,7 +459,7 @@
         "properties": {
           "product": {
             "$ref": "#/shapes/Product/schema",
-            "@mapping": "shopify:michaels-store-takeshape-1:ProductCreatePayload.product"
+            "@mapping": "shopify:seans-store-takeshape:ProductCreatePayload.product"
           }
         }
       },
@@ -356,7 +473,7 @@
         "properties": {
           "name": {
             "type": "string",
-            "@mapping": "shopify:michaels-store-takeshape-1:Tag.nameId"
+            "@mapping": "shopify:seans-store-takeshape:Tag.nameId"
           }
         },
         "required": ["name"]
@@ -368,123 +485,18 @@
       "title": "Tag"
     }
   },
-  "projectId": "9fc2fd66-35bc-438b-980f-0da4fc77f00d",
-  "updated": 1599164996308,
-  "version": 9,
-  "mutations": {
-    "deletePost": {
-      "type": "boolean",
-      "resolver": "takeshape:delete",
-      "source": "takeshape:self:Post"
+  "projectId": "2dfe9bff-a0be-4309-ab53-acbe60bdb44b",
+  "updated": "2018-09-08T20:16:45.814Z",
+  "forms": {
+    "Post": {
+      "default": {
+        "order": ["title", "body", "rating", "tags"]
+      }
     },
-    "updateTag": {
-      "type": "Tag",
-      "resolver": "takeshape:update",
-      "source": "takeshape:self:Tag"
-    },
-    "deleteTag": {
-      "type": "boolean",
-      "resolver": "takeshape:delete",
-      "source": "takeshape:self:Tag"
-    },
-    "updatePost": {
-      "type": "Post",
-      "resolver": "takeshape:update",
-      "source": "takeshape:self:Post"
-    },
-    "createTag": {
-      "type": "Tag",
-      "resolver": "takeshape:create",
-      "source": "takeshape:self:Tag"
-    },
-    "createPost": {
-      "type": "Post",
-      "resolver": "takeshape:create",
-      "source": "takeshape:self:Post"
-    },
-    "createProduct": {
-      "resolver": "graphql:mutation",
-      "args": {
-        "type": "object",
-        "properties": {
-          "input": {
-            "$ref": "#/shapes/ProductInput/schema"
-          }
-        },
-        "required": ["input"]
-      },
-      "source": "shopify:michaels-store-takeshape-1:Product",
-      "type": "ProductCreatePayload",
-      "query": "productCreate"
-    }
-  },
-  "queries": {
-    "getProduct": {
-      "resolver": "graphql:query",
-      "args": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "@tag": "id"
-          }
-        },
-        "required": ["id"]
-      },
-      "source": "shopify:michaels-store-takeshape-1:Product",
-      "type": "Product",
-      "query": "product"
-    },
-    "getPost": {
-      "type": "Post",
-      "resolver": "takeshape:get",
-      "source": "takeshape:self:Post"
-    },
-    "getTag": {
-      "type": "Tag",
-      "resolver": "takeshape:get",
-      "source": "takeshape:self:Tag"
-    },
-    "getTagList": {
-      "type": "PaginatedList<Tag>",
-      "resolver": "takeshape:list",
-      "source": "takeshape:self:Tag"
-    },
-    "getPostList": {
-      "type": "PaginatedList<Post>",
-      "resolver": "takeshape:list",
-      "source": "takeshape:self:Post"
-    },
-    "getProductList": {
-      "resolver": "graphql:query",
-      "args": {
-        "type": "object",
-        "properties": {
-          "after": {
-            "type": "string",
-            "description": "Returns the elements that come after the specified cursor."
-          },
-          "last": {
-            "type": "integer",
-            "description": "Returns up to the last `n` elements from the list."
-          },
-          "reverse": {
-            "type": "boolean",
-            "description": "Reverse the order of the underlying list."
-          },
-          "before": {
-            "type": "string",
-            "description": "Returns the elements that come before the specified cursor."
-          },
-          "first": {
-            "type": "integer",
-            "description": "Returns up to the first `n` elements from the list."
-          }
-        }
-      },
-      "source": "shopify:michaels-store-takeshape-1:Product",
-      "type": "ProductConnection",
-      "query": "products"
+    "Tag": {
+      "default": {
+        "order": ["name"]
+      }
     }
   }
 }
